@@ -12,16 +12,30 @@ public class CamaraFollow : MonoBehaviour {
 	void Start () {
 		control = player.GetComponent<Control> ();
 		distance /= 100f;
-		triggerDistanceX = Screen.width * distance; 
-		triggerDistanceY = Screen.width * distance;
+		triggerDistanceX = Screen.width * distance;
+		triggerDistanceY = Screen.height * distance;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		Vector2 screenPos = Camera.main.WorldToScreenPoint(player.transform.position);
-		if (screenPos.x < triggerDistanceX || screenPos.y < triggerDistanceY || screenPos.x > Screen.width - triggerDistanceX || screenPos.y > Screen.height - triggerDistanceY) {
-			Vector2 pos = Vector2.MoveTowards((Vector2)transform.position, (Vector2)player.transform.position, control.speed * Time.deltaTime); 
-			transform.position = new Vector3 (pos.x, pos.y, -1);
-		}
+		Vector2 newScreenPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+
+		if (screenPos.x < triggerDistanceX)
+			newScreenPosition += new Vector2(screenPos.x - triggerDistanceX, 0);
+		else if(screenPos.x > Screen.width - triggerDistanceX)
+			newScreenPosition += new Vector2(screenPos.x - Screen.width + triggerDistanceX, 0);
+
+		if (screenPos.y < triggerDistanceY)
+			newScreenPosition += new Vector2(0, screenPos.y - triggerDistanceY);
+		else if(screenPos.y > Screen.height - triggerDistanceY)
+			newScreenPosition += new Vector2(0, screenPos.y - Screen.height + triggerDistanceY);
+
+		newScreenPosition = Camera.main.ScreenToWorldPoint(newScreenPosition);
+		moveCameraTo(newScreenPosition);
+	}
+
+	void moveCameraTo(Vector2 pos){
+		transform.position = new Vector3(pos.x, pos.y, -10);
 	}
 }
