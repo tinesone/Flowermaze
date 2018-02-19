@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CamaraFollow : MonoBehaviour {
 	public GameObject player;
-	Control control;
-	public float distance = 10f;
+	public float distance = 35f;
 	float triggerDistanceX;
 	float triggerDistanceY;
 
 	void Start () {
-		control = player.GetComponent<Control> ();
 		distance /= 100f;
 		triggerDistanceX = Screen.width * distance;
 		triggerDistanceY = Screen.height * distance;
@@ -19,7 +17,7 @@ public class CamaraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector2 screenPos = Camera.main.WorldToScreenPoint(player.transform.position);
-		Vector2 newScreenPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+		Vector2 newScreenPosition = new Vector2((float)Screen.width / (float)2, (float)Screen.height / (float)2);
 
 		if (screenPos.x < triggerDistanceX)
 			newScreenPosition += new Vector2(screenPos.x - triggerDistanceX, 0);
