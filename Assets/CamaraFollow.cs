@@ -9,9 +9,8 @@ public class CamaraFollow : MonoBehaviour {
 	float triggerDistanceY;
 
 	void Start () {
-		distance /= 100f;
-		triggerDistanceX = Screen.width * distance;
-		triggerDistanceY = Screen.height * distance;
+		triggerDistanceX = Screen.width * (distance / 100f);
+		triggerDistanceY = Screen.height * (distance / 100f);
 	}
 
 	// Update is called once per frame
