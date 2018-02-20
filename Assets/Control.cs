@@ -6,17 +6,20 @@ using UnityEngine;
 
 
 public class Control : MonoBehaviour {
+
+	Rigidbody2D rb;
+
 	public float speed = 10f;
 
 	// Use this for initialization
 	void Start () {
-		
+		rb = GetComponent<Rigidbody2D>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		float y = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;
-		float x = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
-		transform.Translate(x, y, 0);
+	void FixedUpdate () {
+		float y = Input.GetAxisRaw("Vertical") * speed;
+		float x = Input.GetAxisRaw("Horizontal") * speed;
+		rb.velocity = new Vector2(x, y);
 	}
 }
