@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tempEnemyMovement : MonoBehaviour {
+public class Container : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
