@@ -18,7 +18,7 @@ public class Attack : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.F) && !attacking) {
+		if (Input.GetKeyDown (KeyCode.Mouse0) && !attacking) {
 			attacking = true;
 			attackingTimer = attackingCD;
 			attackTrigger.enabled = true;
