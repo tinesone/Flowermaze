@@ -6,7 +6,7 @@ public class Attack : MonoBehaviour {
 	private bool attacking = false;
 
 	private float attackingTimer = 0f;
-	private float attackingCD = 0.03f;
+	private float attackingCD = .3f;
 
 	public Collider2D attackTrigger;
 
@@ -18,13 +18,13 @@ public class Attack : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Mouse1) && !attacking) {
+		if (Input.GetKeyDown (KeyCode.F) && !attacking) {
 			attacking = true;
 			attackingTimer = attackingCD;
 			attackTrigger.enabled = true;
 		}
 		if (attacking){
-			if (attackingTimer < 0) {
+			if (attackingTimer > 0) {
 				attackingTimer =- Time.deltaTime;
 			} else {
 				attacking = false;
