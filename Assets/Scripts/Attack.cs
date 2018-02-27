@@ -18,18 +18,20 @@ public class Attack : MonoBehaviour {
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Mouse0) && !attacking) {
+		if (Input.GetKeyDown (KeyCode.F) && !attacking) {
 			attacking = true;
 			attackingTimer = attackingCD;
 			attackTrigger.enabled = true;
 		}
 		if (attacking){
 			if (attackingTimer > 0) {
-				attackingTimer =- Time.deltaTime;
+				attackingTimer -= Time.deltaTime;
 			} else {
 				attacking = false;
 				attackTrigger.enabled = false;
 			}
 		}
+		//print("attacking: " + attacking);
+		//print("attackingTimer: " + attackingTimer);
 	}
 }
