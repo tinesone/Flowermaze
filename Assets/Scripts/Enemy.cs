@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour {
 
 	public int maxHealth = 20;
 	public int curHealth = 0;
+	
+	public GameObject player;
 
 	void Start(){
 		curHealth = maxHealth;
@@ -18,7 +20,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 
-	public void RecieveDamage(int dmg){
+	public void ApplyDamage(int dmg){
 		curHealth -= dmg;
 	}
 }

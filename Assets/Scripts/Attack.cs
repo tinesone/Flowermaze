@@ -6,13 +6,13 @@ public class Attack : MonoBehaviour {
 	private bool attacking = false;
 
 	private float attackingTimer = 0f;
-	private float attackingCD = .3f;
+	private float attackingCD = .03f;
 
 	public Collider2D attackTrigger;
 
 	private Animator anim;
 
-	void Start(){
+	void Awake(){
 		anim = gameObject.GetComponent<Animator> ();
 		attackTrigger.enabled = false;
 	}
@@ -31,7 +31,5 @@ public class Attack : MonoBehaviour {
 				attackTrigger.enabled = false;
 			}
 		}
-		//print("attacking: " + attacking);
-		//print("attackingTimer: " + attackingTimer);
 	}
 }
