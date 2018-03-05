@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class attackTrigger : MonoBehaviour {
 	
-	public int dmg =  2;
 	
-	public float attackCooldown = .5f;
+	public float attackCooldown = 3f;
 	private float attackTimer = 0f;
+	Control control;
 	
-	
-	void OnTriggerEnter2D(Collider2D col){
-		if (Input.GetKeyDown(KeyCode.F)){
-			col.SendMessageUpwards("ApplyDamage", dmg);
-		}
+	void FixedUpdate(){
+		if (attackTimer > 0f)
+			attackTimer -= .1f;
 	}
+	
+	
 	
 	void OnTriggerStay2D(Collider2D col){
-		if (Input.GetKeyDown(KeyCode.F)){
-			col.SendMessageUpwards("ApplyDamage", dmg);
-		}
-	}
-	
-	void OnTriggerExit2D(Collider2D col){
-		if (Input.GetKeyDown(KeyCode.F)){
-			col.SendMessageUpwards("ApplyDamage", dmg);
+		Control control = this.transform.parent.GetComponent<Control>();
+		if (Input.GetMouseButton(0) && attackTimer <= 0){
+			col.SendMessageUpwards("ApplyDamage", control.dmg);
+			attackTimer = attackCooldown;
 		}
 	}
 }

@@ -9,6 +9,8 @@ public class Control : MonoBehaviour {
 
 	Rigidbody2D rb;
 
+	public int dmg = 20;
+	
 	public float speed = 10f;
 
 	// Use this for initialization
