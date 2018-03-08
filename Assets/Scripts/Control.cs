@@ -12,6 +12,10 @@ public class Control : MonoBehaviour {
 	public int dmg = 20;
 	
 	public float speed = 10f;
+	
+	public float y;
+	public float x;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -20,8 +24,8 @@ public class Control : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		float y = Input.GetAxisRaw("Vertical") * speed;
-		float x = Input.GetAxisRaw("Horizontal") * speed;
+		y = Input.GetAxisRaw("Vertical") * speed;
+		x = Input.GetAxisRaw("Horizontal") * speed;
 		rb.velocity = new Vector2(x, y);
 	}
 }
