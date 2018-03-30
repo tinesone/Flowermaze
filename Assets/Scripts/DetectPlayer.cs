@@ -17,6 +17,5 @@ public class DetectPlayer : MonoBehaviour {
 	void Update () {
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        print(x.ToString("R") + y.ToString("R"));
 	}
 }
