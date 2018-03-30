@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
 
 	public float maxHealth = 200f;
 	private float curHealth = 0;
+	private bool died = false;
 	
 	public GameObject player;
 	
@@ -21,12 +22,15 @@ public class Enemy : MonoBehaviour {
 	void Start(){
 		audioSource = GetComponent<AudioSource>();
 		curHealth = maxHealth;
+
 	}
 
 	void Update(){
-		if (curHealth <= 0) {
-			Destroy (gameObject);
+		if (curHealth <= 0 && died  == false) {
+			died = true;
+			print ("died");
 			audioSource.PlayOneShot(death, 1f);
+			Invoke("remove", 0.4f);
 		}
 	}
 
@@ -35,6 +39,11 @@ public class Enemy : MonoBehaviour {
 		dmg = dmg - (dmg * armor / 100f);
 		curHealth -= dmg;
 		print(curHealth);
-		audioSource.PlayOneShot(hit, 1f);
+		//audioSource.PlayOneShot(hit, 1f);
+	}
+
+
+	void remove(){
+		Destroy (gameObject);
 	}
 }
