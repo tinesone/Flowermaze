@@ -8,15 +8,28 @@ public class DetectPlayer : MonoBehaviour {
 
     GameObject player;
 
-	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
-	// Update is called once per frame
 	void Update () {
+        Control control = player.GetComponent<Control>();
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        print(x.ToString("R") + y.ToString("R"));
+        if (x >= -3.5 && x <= 3.5 && y >= -3.15 && y <= 3.15)
+        {
+            control.ApplyDamage(20);
+        }
 	}
 }
+
+
+/*
+void Earbuds(stupid person)
+{
+    Destroy(person);
+}
+
+Earbuds(mees);
+
+*/

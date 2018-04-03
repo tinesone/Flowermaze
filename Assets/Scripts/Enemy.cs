@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour {
 
 
 	public void ApplyDamage(float dmg){
-		dmg = dmg - (dmg * armor / 100f);
+		dmg = dmg - dmg * armor / 100f;
 		curHealth -= dmg;
 		print(curHealth);
 		//audioSource.PlayOneShot(hit, 1f);

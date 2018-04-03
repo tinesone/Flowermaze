@@ -286,6 +286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 20
+  maxHealth: 503
+  armor: 60
   speed: 10
   y: 0
   x: 0
@@ -363,7 +365,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1176687357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 5, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1838571417}
@@ -437,6 +439,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2cc3c82fccefb884a8e0a6e8727725ec, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1432136326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1432136328}
+  - component: {fileID: 1432136327}
+  m_Layer: 0
+  m_Name: Scriptloader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1432136327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432136326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625a730b63dacd94d833841fc996b4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1432136328
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1432136326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1645965264
 Prefab:
   m_ObjectHideFlags: 0
@@ -491,8 +533,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1656196127}
-  - component: {fileID: 1656196128}
   - component: {fileID: 1656196126}
+  - component: {fileID: 1656196128}
   m_Layer: 0
   m_Name: Sickle Hit
   m_TagString: Untagged
@@ -539,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912d8a05c89099a4494320aa751f4628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 3
+  attackCooldown: 1.5
 --- !u!1 &1838571416
 GameObject:
   m_ObjectHideFlags: 0

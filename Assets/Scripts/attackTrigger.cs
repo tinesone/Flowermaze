@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class attackTrigger : MonoBehaviour {
+public class AttackTrigger : MonoBehaviour {
 	
 	
 	public float attackCooldown = 1.5f;
