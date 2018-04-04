@@ -31,7 +31,7 @@ public class DetectPlayer : MonoBehaviour {
             musicPicker = 1;
         else if (x >= 3.5 && x <= 7 && y <= 7 && y >= 3.5)
             musicPicker = 2;
-        else if (x >= -3.5 && x < - -7 && y <= -3.5 && y >= -7)
+        else if (x >= -3.5 && x <= -7 && y <= -3.5 && y >= -7)
             musicPicker = 3;
         switch (musicPicker)
         {
