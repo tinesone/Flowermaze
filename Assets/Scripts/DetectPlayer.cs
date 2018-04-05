@@ -23,15 +23,15 @@ public class DetectPlayer : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         musicBlocker = 0;
 	}
-	
+
 	void Update () {
         float x = player.transform.position.x;
         float y = player.transform.position.y;
-        if (x >= -3.5 && x <= 3.5 && y >= -3.5 && y <= 3.5)
+        if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
             musicPicker = 1;
-        else if (x >= 3.5 && x <= 7 && y <= 7 && y >= 3.5)
+        else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
             musicPicker = 2;
-        else if (x >= -3.5 && x <= -7 && y <= -3.5 && y >= -7)
+        else if (x >= 3.5f && x <= 10.5f && y >= -3.5f && y <= -10.5f)
             musicPicker = 3;
         switch (musicPicker)
         {
