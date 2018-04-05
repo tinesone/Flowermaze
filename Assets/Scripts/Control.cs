@@ -11,21 +11,21 @@ public class Control : MonoBehaviour {
 
 	public int dmg = 20;
 
-    public int maxHealth = 503;
-    private int curHealth = 0;
+  public int maxHealth = 503;
+  private int curHealth = 0;
 
-    public float armor = 60;
-	
+  public float armor = 60;
+
 	public float speed = 10f;
-	
+
 	public float y;
 	public float x;
-	
+
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-        curHealth = maxHealth;
+    curHealth = maxHealth;
 	}
 
 	// Update is called once per frame
@@ -37,23 +37,23 @@ public class Control : MonoBehaviour {
 
     private void Update()
     {
-        if (curHealth <= 0)
-        {
-            print("died");
-            Invoke("remove", 0.4f);
-        }
+      if (curHealth <= 0)
+      {
+        print("died");
+        Invoke("remove", 0.4f);
+      }
     }
 
 
     public void ApplyDamage(float damege)
     {
-        damege = damege - damege * armor / 100f;
-        curHealth -= (int)damege;
-        print(curHealth);
+      damege = damege - damege * armor / 100f;
+      curHealth -= (int)damege;
+      print(curHealth);
     }
 
     void remove()
     {
-        Destroy(gameObject);
+      Destroy(gameObject);
     }
 }
