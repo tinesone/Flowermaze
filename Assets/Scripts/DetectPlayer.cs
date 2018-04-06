@@ -16,7 +16,7 @@ public class DetectPlayer : MonoBehaviour
     private int musicBlocker;
 
     public static DetectPlayer Instance;
-    public float FadeTime = 15.0f;
+    public float FadeTime = 2.0f;
 
 
     private static bool keepFadingIn;
@@ -52,7 +52,7 @@ public class DetectPlayer : MonoBehaviour
             musicPicker = 1;
         else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
             musicPicker = 2;
-        else if (x >= 3.5f && x <= -7f && y >= -7f && y <= -7)
+        else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
             musicPicker = 3;
         switch (musicPicker)
         {
