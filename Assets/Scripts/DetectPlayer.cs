@@ -117,30 +117,42 @@ public class DetectPlayer : MonoBehaviour
 
         newAudioSource.clip = newTrack;
 
-        newAudioSource.Play();
-
-        Instance.StartCoroutine(Instance.RealCrossFade(newAudioSource, fadeTime));
+        Instance.StartCoroutine(Instance.Fade(newAudioSource, fadeTime));
     }
 
-    private IEnumerator RealCrossFade(AudioSource newAudioSource, float fadeTime)
+    private IEnumerator Fade(AudioSource newAudioSource, float fadeTime)
     {
         float t = 0.0f;
 
-        while (t < fadeTime)
+        /*while (t < fadeTime)
         {
-            newAudioSource.volume = Mathf.Lerp(0.0f, 1.0f, t / fadeTime);
+            audioSource.volume = Mathf.Lerp(1.0f, 0.0f, t / FadeTime);
 
-            audioSource.volume = 1.0f - newAudioSource.volume;
+            t -= Time.deltaTime;
+
+        }
+        */
+        newAudioSource.Play();
+        /*while (t > fadeTime)
+        {
+            newAudioSource.volume = Mathf.Lerp(0.0f, 1.0f, t / FadeTime);
 
             t += Time.deltaTime;
 
             yield return null;
         }
 
+        */
         newAudioSource.volume = 1.0f;
 
+        Destroy(audioSource);
+
         audioSource = newAudioSource;
+
+        yield return null;
+
     }
+
 }
 
 
