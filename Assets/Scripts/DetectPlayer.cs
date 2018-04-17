@@ -38,28 +38,33 @@ public class DetectPlayer : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        player = GameObject.FindGameObjectWithTag("Player");
         musicBlocker = 0;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
         Instance = this;
     }
 
     void Update()
     {
-        print(audioSource.volume);
+
         float x = player.transform.position.x;
         float y = player.transform.position.y;
+
         if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
             musicPicker = 1;
         else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
             musicPicker = 2;
         else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
             musicPicker = 3;
+
         switch (musicPicker)
         {
             case (1):
                 if (musicBlocker != musicPicker)
                 {
                     musicBlocker = musicPicker;
+
                     Crossfade(music1, FadeTime);
                 }
                 break;
@@ -67,6 +72,7 @@ public class DetectPlayer : MonoBehaviour
                 if (musicBlocker != musicPicker)
                 {
                     musicBlocker = musicPicker;
+
                     Crossfade(music2, FadeTime);
                 }
                 break;
@@ -74,6 +80,7 @@ public class DetectPlayer : MonoBehaviour
                 if (musicBlocker != musicPicker)
                 {
                     musicBlocker = musicPicker;
+
                     Crossfade(music3, FadeTime);
                 }
                 break;
@@ -122,9 +129,11 @@ public class DetectPlayer : MonoBehaviour
         while (t < fadeTime)
         {
             newAudioSource.volume = Mathf.Lerp(0.0f, 1.0f, t / fadeTime);
+
             audioSource.volume = 1.0f - newAudioSource.volume;
 
             t += Time.deltaTime;
+
             yield return null;
         }
 
@@ -133,7 +142,7 @@ public class DetectPlayer : MonoBehaviour
         audioSource = newAudioSource;
     }
 }
- 
+
 
 
 /*

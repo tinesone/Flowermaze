@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 504945565}
   - component: {fileID: 504945569}
   m_Layer: 0
-  m_Name: Elevator
+  m_Name: Swordland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 656404402}
   - component: {fileID: 656404406}
   m_Layer: 0
-  m_Name: Swordland
+  m_Name: Gunland
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,10 +551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625a730b63dacd94d833841fc996b4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  music1: {fileID: 8300000, guid: 3e6523458b7b5744f9b8716d01efd945, type: 3}
-  music2: {fileID: 8300000, guid: 1877eff05fb112947acb4066bd2d21f5, type: 3}
-  music3: {fileID: 8300000, guid: 1206d7c39f3a74d42aae06bbfd9c31f5, type: 3}
-  FadeTime: 15
+  music1: {fileID: 8300000, guid: 1877eff05fb112947acb4066bd2d21f5, type: 3}
+  music2: {fileID: 8300000, guid: 1206d7c39f3a74d42aae06bbfd9c31f5, type: 3}
+  music3: {fileID: 8300000, guid: 4e7ffd4d5e538564cb10759a5a5a5a29, type: 3}
+  FadeTime: 2
 --- !u!82 &755598304
 AudioSource:
   m_ObjectHideFlags: 0
