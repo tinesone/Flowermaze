@@ -6,163 +6,63 @@ using System.IO;
 [RequireComponent(typeof(AudioSource))]
 public class DetectPlayer : MonoBehaviour
 {
-    AudioSource audioSource;
-
+    public float fadeTime = 2.0f;
     public AudioClip music1;
     public AudioClip music2;
     public AudioClip music3;
 
-    private int musicPicker;
-    private int musicBlocker;
-
-    public static DetectPlayer Instance;
-    public float FadeTime = 2.0f;
-
-
-    private static bool keepFadingIn;
-    private static bool keepFadingOut;
-
-
-    private string boundariesFileName = "boundaries.json";
-
-    //Dictionary<string, List<float>> boundaries = new Dictionary<string, List<float>>();
-    Boundaries boundaries;
-
-    GameObject player;
+    private int currentArea;
+    private int nextArea = -1;
+    private int fadeDirection = 0;
+    private float fadeStartTime;
+    private GameObject player;
+    private AudioSource audioSource;
 
     void Start()
     {
-        loadBoundaryData();
-    }
-
-    void Awake()
-    {
         audioSource = GetComponent<AudioSource>();
-        musicBlocker = 0;
-
         player = GameObject.FindGameObjectWithTag("Player");
-
-        Instance = this;
     }
 
     void Update()
     {
-
-        float x = player.transform.position.x;
-        float y = player.transform.position.y;
-
-        if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
-            musicPicker = 1;
-        else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
-            musicPicker = 2;
-        else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
-            musicPicker = 3;
-
-        switch (musicPicker)
+        int area = GetArea();
+        if((area == -1 || area == currentArea) && nextArea == -1) return;
+        if(nextArea == -1)
         {
-            case (1):
-                if (musicBlocker != musicPicker)
-                {
-                    musicBlocker = musicPicker;
-
-                    Crossfade(music1, FadeTime);
-                }
-                break;
-            case (2):
-                if (musicBlocker != musicPicker)
-                {
-                    musicBlocker = musicPicker;
-
-                    Crossfade(music2, FadeTime);
-                }
-                break;
-            case (3):
-                if (musicBlocker != musicPicker)
-                {
-                    musicBlocker = musicPicker;
-
-                    Crossfade(music3, FadeTime);
-                }
-                break;
+            nextArea = area;
+            fadeStartTime = Time.time;
+            fadeDirection = -1;
         }
+        float volume = (Time.time-fadeStartTime)/fadeTime;
+        if(fadeDirection == -1) volume = 1 - volume;
+        if(volume >= 1 && fadeDirection == 1)
+        {
+            currentArea = nextArea;
+            nextArea = -1;
+            volume = 1;
+        }
+        if(volume <= 0 && fadeDirection == -1)
+        {
+            volume = 0;
+            fadeDirection = 1;
+            fadeStartTime = Time.time;
+            Debug.Log(nextArea);
+        }
+        audioSource.volume = volume;
     }
 
-    private void loadBoundaryData()
+    int GetArea()
     {
-        // Path.Combine combines strings into a file path
-        // Application.StreamingAssets points to Assets/StreamingAssets in the Editor, and the StreamingAssets folder in a build
-        string filePath = Path.Combine(Application.streamingAssetsPath, boundariesFileName);
+      float x = player.transform.position.x;
+      float y = player.transform.position.y;
 
-        if (File.Exists(filePath))
-        {
-            // Read the json from the file into a string
-            string dataAsJson = File.ReadAllText(filePath);
-            // Pass the json to JsonUtility, and tell it to create a GameData object from it
-            Boundaries loadedData = JsonUtility.FromJson<Boundaries>(dataAsJson);
-
-            // Retrieve the allRoundData property of loadedData
-            boundaries = loadedData;
-        }
-        else
-        {
-            Debug.LogError("Cannot load music boundaries!");
-        }
+      if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
+          return 1;
+      else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
+          return 2;
+      else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
+          return 3;
+      return -1;
     }
-
-    public static void Crossfade(AudioClip newTrack, float fadeTime = 1.0f)
-    {
-        AudioSource newAudioSource = Instance.gameObject.AddComponent<AudioSource>();
-
-        newAudioSource.volume = 0.0f;
-
-        newAudioSource.clip = newTrack;
-
-        Instance.StartCoroutine(Instance.Fade(newAudioSource, fadeTime));
-    }
-
-    private IEnumerator Fade(AudioSource newAudioSource, float fadeTime)
-    {
-        float t = 0.0f;
-
-        /*while (t < fadeTime)
-        {
-            audioSource.volume = Mathf.Lerp(1.0f, 0.0f, t / FadeTime);
-
-            t -= Time.deltaTime;
-
-        }
-        */
-        newAudioSource.Play();
-        /*while (t > fadeTime)
-        {
-            newAudioSource.volume = Mathf.Lerp(0.0f, 1.0f, t / FadeTime);
-
-            t += Time.deltaTime;
-
-            yield return null;
-        }
-
-        */
-        newAudioSource.volume = 1.0f;
-
-        Destroy(audioSource);
-
-        audioSource = newAudioSource;
-
-        yield return null;
-
-    }
-
 }
-
-
-
-/*
-void Earbuds(stupid person)
-{
-    Destroy(person);
-}
-
-Earbuds(mees);
-
-*/
