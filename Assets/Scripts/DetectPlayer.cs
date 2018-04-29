@@ -47,7 +47,7 @@ public class DetectPlayer : MonoBehaviour
             volume = 0;
             fadeDirection = 1;
             fadeStartTime = Time.time;
-            Debug.Log(nextArea);
+            Debug.Log(nextArea); // TODO: Need to replace with audio play
         }
         audioSource.volume = volume;
     }

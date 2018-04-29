@@ -8,7 +8,7 @@ public class AttackTrigger : MonoBehaviour
     public float attackCooldown = 1.5f;
     private float attackTimer = 0f;
 
-    void FixedUpdate()
+    void Update()
     {
         if (attackTimer > 0f)
             attackTimer -= .1f;

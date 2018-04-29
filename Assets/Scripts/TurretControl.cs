@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackControl : MonoBehaviour
+public class TurretControl : MonoBehaviour
 {
 
-    void FixedUpdate()
+    void Update()
     {
         Control control = this.transform.parent.GetComponent<Control>();
         if (control.x > 0 && control.y == 0)
