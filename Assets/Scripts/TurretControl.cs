@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TurretControl : MonoBehaviour
 {
-
     void Update()
     {
         Control control = this.transform.parent.GetComponent<Control>();
@@ -24,6 +23,5 @@ public class TurretControl : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, -135);
         if (control.x < 0 && control.y > 0)
             transform.rotation = Quaternion.Euler(0, 0, 45);
-
     }
 }

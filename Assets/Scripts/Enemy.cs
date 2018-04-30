@@ -3,18 +3,15 @@
 [RequireComponent(typeof(AudioSource))]
 public class Enemy : MonoBehaviour
 {
-
     public int armor = 30;
-
     public float maxHealth = 200f;
-    private float curHealth = 0;
-    private bool died = false;
-
-    public GameObject player;
-
     public AudioClip death;
     public AudioClip hit;
-    AudioSource audioSource;
+    public GameObject player;
+
+    private float curHealth = 0;
+    private bool died = false;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -22,10 +19,9 @@ public class Enemy : MonoBehaviour
         curHealth = maxHealth;
     }
 
-
     public void ApplyDamage(float dmg)
     {
-        dmg = dmg - dmg * armor / 100f;
+        dmg -= dmg * armor / 100f;
         curHealth -= dmg;
         print(curHealth);
         if (curHealth > 15)

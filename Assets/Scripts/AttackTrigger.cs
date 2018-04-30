@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttackTrigger : MonoBehaviour
 {
-
     public float attackCooldown = 1.5f;
+
     private float attackTimer = 0f;
 
     void Update()
@@ -13,8 +13,6 @@ public class AttackTrigger : MonoBehaviour
         if (attackTimer > 0f)
             attackTimer -= .1f;
     }
-
-
 
     void OnTriggerStay2D(Collider2D col)
     {

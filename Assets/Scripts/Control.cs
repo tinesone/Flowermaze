@@ -2,35 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class Control : MonoBehaviour
 {
-
-    Rigidbody2D rb;
-
     public int dmg = 20;
-
     public int maxHealth = 503;
-    private int curHealth = 0;
-
     public float armor = 60;
-
     public float speed = 10f;
-
     public float y;
     public float x;
 
+    private int curHealth = 0;
+    private Rigidbody2D rb;
 
-    // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         curHealth = maxHealth;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         y = Input.GetAxisRaw("Vertical") * speed;
@@ -48,10 +37,10 @@ public class Control : MonoBehaviour
     }
 
 
-    public void ApplyDamage(float damege)
+    public void ApplyDamage(float damage)
     {
-        damege = damege - damege * armor / 100f;
-        curHealth -= (int)damege;
+        damage -= damage * armor / 100f;
+        curHealth -= (int)damage;
         print(curHealth);
     }
 
