@@ -26,23 +26,25 @@ public class DetectPlayer : MonoBehaviour
 
     void Update()
     {
-        int area = GetArea();
-        if((area == -1 || area == currentArea) && nextArea == -1) return;
-        if(nextArea == -1)
+        int area = GetArea(); // Get the area where the player currently is
+        if((area == -1 || area == currentArea) && nextArea == -1) return; // If the player is in no area and we are not currently fading then return
+        if(nextArea == -1 || (area != nextArea && area != -1)) // If the player steps into a new area
         {
             nextArea = area;
-            fadeStartTime = Time.time;
+            if(fadeDirection == 0) fadeStartTime = Time.time;
+            if(fadeDirection == 1) fadeStartTime = Time.time - (fadeTime - (Time.time - fadeStartTime));
             fadeDirection = -1;
         }
-        float volume = (Time.time-fadeStartTime)/fadeTime;
-        if(fadeDirection == -1) volume = 1 - volume;
-        if(volume >= 1 && fadeDirection == 1)
+        float volume = (Time.time-fadeStartTime)/fadeTime; // Calculate the volume
+        if(fadeDirection == -1) volume = 1 - volume; // Invert the volume if necessary
+        if(volume >= 1 && fadeDirection == 1) // If we reached 100% volume stop fading
         {
             currentArea = nextArea;
             nextArea = -1;
             volume = 1;
+            fadeDirection = 0;
         }
-        if(volume <= 0 && fadeDirection == -1)
+        if(volume <= 0 && fadeDirection == -1) // If we reached 0% volume invert fading direction
         {
             volume = 0;
             fadeDirection = 1;
