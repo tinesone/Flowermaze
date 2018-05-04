@@ -7,20 +7,17 @@ using System.IO;
 public class DetectPlayer : MonoBehaviour
 {
     public float fadeTime = 2.0f;
-    public AudioClip music1;
-    public AudioClip music2;
-    public AudioClip music3;
+    public List<AudioClip> musicClips = new List<AudioClip>();
+    public AudioSource audioSource;
 
-    private int currentArea;
+    private int currentArea = -1;
     private int nextArea = -1;
     private int fadeDirection = 0;
     private float fadeStartTime;
     private GameObject player;
-    private AudioSource audioSource;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -49,7 +46,8 @@ public class DetectPlayer : MonoBehaviour
             volume = 0;
             fadeDirection = 1;
             fadeStartTime = Time.time;
-            Debug.Log(nextArea); // TODO: Need to replace with audio play
+            audioSource.Stop();
+            audioSource.PlayOneShot(musicClips[nextArea], 1f);
         }
         audioSource.volume = volume;
     }
@@ -60,11 +58,11 @@ public class DetectPlayer : MonoBehaviour
       float y = player.transform.position.y;
 
       if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
-          return 1;
+          return 0;
       else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
-          return 2;
+          return 1;
       else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
-          return 3;
+          return 2;
       return -1;
     }
 }

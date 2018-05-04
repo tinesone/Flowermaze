@@ -1034,10 +1034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625a730b63dacd94d833841fc996b4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 2
-  music1: {fileID: 8300000, guid: 1877eff05fb112947acb4066bd2d21f5, type: 3}
-  music2: {fileID: 8300000, guid: 1206d7c39f3a74d42aae06bbfd9c31f5, type: 3}
-  music3: {fileID: 8300000, guid: 4e7ffd4d5e538564cb10759a5a5a5a29, type: 3}
+  fadeTime: 5
+  musicClips:
+  - {fileID: 8300000, guid: 1877eff05fb112947acb4066bd2d21f5, type: 3}
+  - {fileID: 8300000, guid: 1206d7c39f3a74d42aae06bbfd9c31f5, type: 3}
+  - {fileID: 8300000, guid: 4e7ffd4d5e538564cb10759a5a5a5a29, type: 3}
+  audioSource: {fileID: 1628701006}
 --- !u!82 &1628701006
 AudioSource:
   m_ObjectHideFlags: 0
