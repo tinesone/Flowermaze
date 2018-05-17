@@ -35,12 +35,14 @@ public class DetectPlayer : MonoBehaviour
             if(fadeDirection == 1) fadeStartTime = Time.time - (fadeTime - (Time.time - fadeStartTime));
             fadeDirection = -1;
         }
-        if (audioSource.clip != null)
+        if (audioSource.clip != null) // Check if clip is playing
         {
+            // If a clip is already active, Fade out
             volume = (Time.time - fadeStartTime) / fadeTime; // Calculate the volume
             if (fadeDirection == -1) volume = 1 - volume; // Invert the volume if necessary
         } else
         {
+            // If  no clip is active, skip fading and instantly set volume to 0
             volume = 0;
         }
         if(volume >= 1 && fadeDirection == 1) // If we reached 100% volume and a clip is playing, stop fading
