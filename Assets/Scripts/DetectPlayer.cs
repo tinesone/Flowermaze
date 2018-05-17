@@ -8,7 +8,7 @@ public class DetectPlayer : MonoBehaviour
 {
     public float fadeTime = 2.0f;
     public List<AudioClip> musicClips = new List<AudioClip>();
-    public AudioSource audioSource;
+    private AudioSource audioSource;
 
     private int currentArea = -1;
     private int nextArea = -1;
@@ -19,6 +19,7 @@ public class DetectPlayer : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()

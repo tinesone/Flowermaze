@@ -8,8 +8,8 @@ public class Control : MonoBehaviour
     public int maxHealth = 503;
     public float armor = 60;
     public float speed = 10f;
-    public float y;
-    public float x;
+    private float y;
+    private float x;
 
     private int curHealth = 0;
     private Rigidbody2D rb;
