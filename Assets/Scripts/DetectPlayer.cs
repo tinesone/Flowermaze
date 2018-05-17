@@ -16,6 +16,8 @@ public class DetectPlayer : MonoBehaviour
     private float fadeStartTime;
     private GameObject player;
 
+    private float volume;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -33,9 +35,15 @@ public class DetectPlayer : MonoBehaviour
             if(fadeDirection == 1) fadeStartTime = Time.time - (fadeTime - (Time.time - fadeStartTime));
             fadeDirection = -1;
         }
-        float volume = (Time.time-fadeStartTime)/fadeTime; // Calculate the volume
-        if(fadeDirection == -1) volume = 1 - volume; // Invert the volume if necessary
-        if(volume >= 1 && fadeDirection == 1) // If we reached 100% volume stop fading
+        if (audioSource.clip != null)
+        {
+            volume = (Time.time - fadeStartTime) / fadeTime; // Calculate the volume
+            if (fadeDirection == -1) volume = 1 - volume; // Invert the volume if necessary
+        } else
+        {
+            volume = 0;
+        }
+        if(volume >= 1 && fadeDirection == 1) // If we reached 100% volume and a clip is playing, stop fading
         {
             currentArea = nextArea;
             nextArea = -1;
@@ -48,7 +56,9 @@ public class DetectPlayer : MonoBehaviour
             fadeDirection = 1;
             fadeStartTime = Time.time;
             audioSource.Stop();
-            audioSource.PlayOneShot(musicClips[nextArea], 1f);
+            //audioSource.PlayOneShot(musicClips[nextArea], 1f);
+            audioSource.clip = musicClips[nextArea]; //Used this instead of audioSource.playOneShot() becouse this one can loop, and also can check if there is already a clip playinh
+            audioSource.Play();
         }
         audioSource.volume = volume;
     }
