@@ -57,8 +57,6 @@ public class DetectPlayer : MonoBehaviour
             volume = 0;
             fadeDirection = 1;
             fadeStartTime = Time.time;
-            audioSource.Stop();
-            //audioSource.PlayOneShot(musicClips[nextArea], 1f);
             audioSource.clip = musicClips[nextArea]; //Used this instead of audioSource.playOneShot() becouse this one can loop, and also can check if there is already a clip playinh
             audioSource.Play();
         }
