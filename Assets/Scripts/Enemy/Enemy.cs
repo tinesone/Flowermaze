@@ -9,14 +9,18 @@ public class Enemy : MonoBehaviour
     public AudioClip hit;
     private AudioSource audioSource;
 
+    Vector2 playerpos;
+
     private float curHealth;
 
-    private float speed = .5f;
-    private float dashSpeed = 5f;
+    public float dmg;
+
+    public float speed = .5f;
+    public float dashSpeed = 5f;
 
     public float attackTimer;
     public float dashTimer;
-    public float dashLength;
+    public float dashCD;
 
 
     private GameObject player;
@@ -32,20 +36,29 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         attackTimer -= .1f;
+        dashTimer -= .1f;
+        dashCD -= .1f;
 
-        Vector2 playerpos = player.transform.position;
+
         Vector2 pos = transform.position;
-        else if (dashTimer > 0)
-        {
 
-        }
-        else if (attackTimer > 0)
+        if (attackTimer > 0)
         {
             transform.position = Vector2.MoveTowards(pos, playerpos, (dashSpeed * -1) * Time.deltaTime);
         }
-        else
+        else if (dashTimer <= 0)
         {
+            playerpos = player.transform.position;
             transform.position = Vector2.MoveTowards(pos, playerpos, speed * Time.deltaTime);
+        }
+
+        else if (dashTimer > 0)
+        {
+            transform.position = Vector2.MoveTowards(pos, playerpos, dashSpeed * Time.deltaTime);
+            if (pos == playerpos)
+            {
+                dashTimer = -1;
+            }
         }
     }
 
@@ -58,7 +71,7 @@ public class Enemy : MonoBehaviour
         if (curHealth > 0)
         {
             print(curHealth);
-            audioSource.PlayOneShot(hit, 1f);
+            //audioSource.PlayOneShot(hit, 1f);
         }
         else
         {

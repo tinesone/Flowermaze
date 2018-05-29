@@ -11,25 +11,20 @@ public class EnemyDashTrigger : MonoBehaviour
 
     private Enemy parentscript;
 
-    public float dashCooldown = 6f;
-    public float dashLengthCD = 3.5f;
+    public float dashLength = 6f;
+    public float dashCD = 20f;
 
     void Start()
     {
         parentscript = this.GetComponentInParent<Enemy>();
     }
 
-
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("Player") && parentscript.attackTimer <= 0 && parentscript.dashTimer < 0)
+        if (col.CompareTag("Player") && parentscript.attackTimer <= 0 && parentscript.dashCD < 0)
         {
-            parentscript.dashLength = dashLengthCD;
-            parentscript.dashTimer = dashCooldown;
-        }
-        else if(parentscript.attackTimer > 0)
-        {
-            parentscript.dashTimer = 3f;
+            parentscript.dashTimer = dashLength;
+            parentscript.dashCD = dashCD;
         }
     }
 }

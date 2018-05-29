@@ -18,6 +18,7 @@ public class Control : MonoBehaviour
     private int curHealth = 0;
     private Rigidbody2D rb;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,8 +27,8 @@ public class Control : MonoBehaviour
 
     void FixedUpdate()
     {
-        y = Input.GetAxisRaw("Vertical") * speed;
-        x = Input.GetAxisRaw("Horizontal") * speed;
+        y = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;
+        x = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
         rb.velocity = new Vector2(x, y);
     }
 
@@ -36,7 +37,7 @@ public class Control : MonoBehaviour
         if (curHealth <= 0)
         {
             print("died");
-            Invoke("remove", 0.4f);
+            Invoke("respawn", 0.4f);
         }
     }
 
@@ -48,8 +49,10 @@ public class Control : MonoBehaviour
         print(curHealth);
     }
 
-    void remove()
+    void respawn()
     {
-        Destroy(gameObject);
+        curHealth = maxHealth;
+        transform.position = new Vector2(0, 0);
+
     }
 }
