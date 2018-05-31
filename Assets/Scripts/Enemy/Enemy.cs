@@ -25,11 +25,14 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
 
+    private Rigidbody2D rb;
+
     void Start()
     {
         curHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
         audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -41,20 +44,22 @@ public class Enemy : MonoBehaviour
 
 
         Vector2 pos = transform.position;
+        Vector2 vel = playerpos - pos;
 
         if (attackTimer > 0)
         {
-            transform.position = Vector2.MoveTowards(pos, playerpos, (dashSpeed * -1) * Time.deltaTime);
+            rb.velocity = vel;
         }
         else if (dashTimer <= 0)
         {
             playerpos = player.transform.position;
-            transform.position = Vector2.MoveTowards(pos, playerpos, speed * Time.deltaTime);
+            rb.velocity = vel;
         }
+        
 
         else if (dashTimer > 0)
         {
-            transform.position = Vector2.MoveTowards(pos, playerpos, dashSpeed * Time.deltaTime);
+            rb.velocity = vel;
             if (pos == playerpos)
             {
                 dashTimer = -1;

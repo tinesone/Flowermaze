@@ -17,7 +17,7 @@ public class EnemyAttackTrigger : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && parentscript.attackTimer <= 0)
         {
             parentscript.attackTimer = attackCooldown;
             col.SendMessageUpwards("ApplyDamage", parentscript.dmg);
