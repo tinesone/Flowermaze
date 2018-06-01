@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public AudioClip hit;
     private AudioSource audioSource;
 
-    Vector2 playerpos;
+    private Vector2 playerpos;
 
     private float curHealth;
 
@@ -42,24 +42,22 @@ public class Enemy : MonoBehaviour
         dashTimer -= .1f;
         dashCD -= .1f;
 
-
-        Vector2 pos = transform.position;
-        Vector2 vel = playerpos - pos;
+        Vector2 pos = this.transform.position; //http://bit.ly/VECTOR2
 
         if (attackTimer > 0)
         {
-            rb.velocity = vel;
+            rb.velocity = new Vector2 (GetRelativePos(playerpos, pos), 0);
         }
         else if (dashTimer <= 0)
         {
             playerpos = player.transform.position;
-            rb.velocity = vel;
+            rb.velocity = new Vector2(GetRelativePos(playerpos, pos), 0);
         }
         
 
         else if (dashTimer > 0)
         {
-            rb.velocity = vel;
+            rb.velocity = new Vector2(GetRelativePos(playerpos, pos), 0);
             if (pos == playerpos)
             {
                 dashTimer = -1;
@@ -85,4 +83,15 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-}
+
+
+    public static float GetRelativePos(Vector2 player, Vector2 enemy)
+    {
+        Vector2 RelativePlayerPos = enemy - player;
+
+        float angle = Mathf.Atan2(RelativePlayerPos.x, RelativePlayerPos.y);
+
+        return angle;
+
+    }
+} 
