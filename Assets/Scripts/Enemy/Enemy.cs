@@ -42,22 +42,28 @@ public class Enemy : MonoBehaviour
         dashTimer -= .1f;
         dashCD -= .1f;
 
+;
+        Vector2 playerpos = player.transform.position;
         Vector2 pos = this.transform.position; //http://bit.ly/VECTOR2
+        Vector2 relativePos = Vector2.one; //new Vector2(GetRelativePos(playerpos, pos), 0);
+
+        Vector2 temp = playerpos - pos;
+
+        print(temp.normalized);
 
         if (attackTimer > 0)
         {
-            rb.velocity = new Vector2 (GetRelativePos(playerpos, pos), 0);
+            rb.velocity = relativePos.normalized / speed * Time.deltaTime;
         }
         else if (dashTimer <= 0)
         {
-            playerpos = player.transform.position;
-            rb.velocity = new Vector2(GetRelativePos(playerpos, pos), 0);
+            rb.velocity = relativePos.normalized * speed * Time.deltaTime;
         }
         
 
         else if (dashTimer > 0)
         {
-            rb.velocity = new Vector2(GetRelativePos(playerpos, pos), 0);
+            rb.velocity = relativePos.normalized * dashSpeed * Time.deltaTime;
             if (pos == playerpos)
             {
                 dashTimer = -1;
@@ -85,13 +91,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public static float GetRelativePos(Vector2 player, Vector2 enemy)
+    /*public static Vector2 GetRelativePos(Vector2 player, Vector2 enemy)
     {
-        Vector2 RelativePlayerPos = enemy - player;
+        if 
 
-        float angle = Mathf.Atan2(RelativePlayerPos.x, RelativePlayerPos.y);
+        return Vector2.one;
 
-        return angle;
-
-    }
+    } */
 } 
