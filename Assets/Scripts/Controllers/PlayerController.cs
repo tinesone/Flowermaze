@@ -1,12 +1,8 @@
-﻿
-
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Control : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public int dmg = 20;
     public int maxHealth = 503;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretControl : MonoBehaviour
+public class TurretController : MonoBehaviour
 {
     void Update()
     {
