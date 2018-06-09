@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 [RequireComponent(typeof(AudioSource))]
-public class DetectPlayer : MonoBehaviour
+public class BackgroundMusic : MonoBehaviour
 {
     public float fadeTime = 2.0f;
     public List<AudioClip> musicClips = new List<AudioClip>();
