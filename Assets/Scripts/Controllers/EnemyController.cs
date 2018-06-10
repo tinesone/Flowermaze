@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame

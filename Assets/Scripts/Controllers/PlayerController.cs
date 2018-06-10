@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
         int i = 0;
         while (i < hitColliders.Length)
         {
-            Debug.Log(hitColliders[i]);
             CharacterStats characterStats = hitColliders[i].GetComponent<CharacterStats>();
             if (characterStats != null)
             {
