@@ -27,12 +27,12 @@ public class BackgroundMusic : MonoBehaviour
     void Update()
     {
         int area = GetArea(); // Get the area where the player currently is
-        if((area == -1 || area == currentArea) && nextArea == -1) return; // If the player is in no area and we are not currently fading then return
-        if(nextArea == -1 || (area != nextArea && area != -1)) // If the player steps into a new area
+        if ((area == -1 || area == currentArea) && nextArea == -1) return; // If the player is in no area and we are not currently fading then return
+        if (nextArea == -1 || (area != nextArea && area != -1)) // If the player steps into a new area
         {
             nextArea = area;
-            if(fadeDirection == 0) fadeStartTime = Time.time;
-            if(fadeDirection == 1) fadeStartTime = Time.time - (fadeTime - (Time.time - fadeStartTime));
+            if (fadeDirection == 0) fadeStartTime = Time.time;
+            if (fadeDirection == 1) fadeStartTime = Time.time - (fadeTime - (Time.time - fadeStartTime));
             fadeDirection = -1;
         }
         if (audioSource.clip != null) // Check if clip is playing
@@ -40,19 +40,20 @@ public class BackgroundMusic : MonoBehaviour
             // If a clip is already active, Fade out
             volume = (Time.time - fadeStartTime) / fadeTime; // Calculate the volume
             if (fadeDirection == -1) volume = 1 - volume; // Invert the volume if necessary
-        } else
+        }
+        else
         {
             // If  no clip is active, skip fading and instantly set volume to 0
             volume = 0;
         }
-        if(volume >= 1 && fadeDirection == 1) // If we reached 100% volume and a clip is playing, stop fading
+        if (volume >= 1 && fadeDirection == 1) // If we reached 100% volume and a clip is playing, stop fading
         {
             currentArea = nextArea;
             nextArea = -1;
             volume = 1;
             fadeDirection = 0;
         }
-        if(volume <= 0 && fadeDirection == -1) // If we reached 0% volume invert fading direction
+        if (volume <= 0 && fadeDirection == -1) // If we reached 0% volume invert fading direction
         {
             volume = 0;
             fadeDirection = 1;
@@ -65,15 +66,15 @@ public class BackgroundMusic : MonoBehaviour
 
     int GetArea()
     {
-      float x = player.transform.position.x;
-      float y = player.transform.position.y;
+        float x = player.transform.position.x;
+        float y = player.transform.position.y;
 
-      if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
-          return 0;
-      else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
-          return 1;
-      else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
-          return 2;
-      return -1;
+        if (x >= -3.5f && x <= 3.5f && y >= -3.5f && y <= 3.5f)
+            return 0;
+        else if (x >= 3.5f && x <= 10.5f && y >= 3.5f && y <= 10.5f)
+            return 1;
+        else if (x >= 3.5f && x <= 10.5f && y >= -7f && y <= -3.5)
+            return 2;
+        return -1;
     }
 }

@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterStats))]
-public class CharacterCombat : MonoBehaviour {
-	CharacterStats myStats;
+public class CharacterCombat : MonoBehaviour
+{
+    CharacterStats myStats;
 
-	void Start ()
-	{
-		myStats = GetComponent<CharacterStats>();
-	}
+    void Start()
+    {
+        myStats = GetComponent<CharacterStats>();
+    }
 
-	public void Attack (CharacterStats targetStats)
-	{
-		targetStats.TakeDamage(myStats.damage.GetValue());
-	}
+    public void Attack(CharacterStats targetStats)
+    {
+        targetStats.TakeDamage(myStats.damage.GetValue());
+    }
 }

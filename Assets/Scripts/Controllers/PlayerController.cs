@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int dmg = 20;
-    public int maxHealth = 503;
-    public float armor = 60;
     public float speed = 10f;
+    public GameObject attackHitbox;
+
     private float y;
     private float x;
-
-    private int curHealth = 0;
     private Rigidbody2D rb;
+    private CharacterCombat playerCombat;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        curHealth = maxHealth;
+        playerCombat = GetComponent<CharacterCombat>();
     }
 
     void FixedUpdate()
@@ -28,27 +26,27 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(x, y);
     }
 
-    private void Update()
+    void Update()
     {
-        if (curHealth <= 0)
+        if (Input.GetMouseButtonDown(0))
         {
-            print("died");
-            Invoke("respawn", 0.4f);
+            Attack();
         }
     }
 
-
-    public void ApplyDamage(float damage)
+    void Attack()
     {
-        damage -= damage * armor / 100f;
-        curHealth -= (int)damage;
-        print(curHealth);
-    }
-
-    void respawn()
-    {
-        curHealth = maxHealth;
-        transform.position = new Vector2(0, 0);
-
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackHitbox.transform.position, 1.5f);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            Debug.Log(hitColliders[i]);
+            CharacterStats characterStats = hitColliders[i].GetComponent<CharacterStats>();
+            if (characterStats != null)
+            {
+                playerCombat.Attack(characterStats);
+            }
+            i++;
+        }
     }
 }
